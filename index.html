@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <title>Kerkkamp-MiddelbareSchool_Aanmeldformulier_2026</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="HandheldFriendly" content="true">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/style.css">
+  
+</head>
+
+<body>
+  <header>
+    <h1>Kerkkamp-MiddelbareSchool_Aanmeldformulier_2026</h1>
+  </header>
+  <main>
+    <ul>
+      <li>
+        <h2>Op 16, 17 en 18 februari is er weer een supertoffe kamp met als thema <strong>"Samen Sterk in
+            Gesprek"</strong> (My Parents are My Friends). Het wordt een onvergetelijk weekend vol workshops,
+          activiteiten, lessen en veel plezier! Zorg dat je erbij bent! 🎉</h2>
+      </li>
+      <li>
+        <h2>Vul in dit inschrijvingsformulier je gegevens in en klik op de knop 'Verzend gegevens' om je gegevens te
+          verzenden.</h2>
+      </li>
+      <li>
+        <h2>Klik daarna op de knop 'Betalen' om je inschrijving te voltooien. De kosten voor het kamp zijn €50,- p.p.
+        </h2>
+      </li>
+      <li>
+        <h2>Vul in de beschrijving van de betaling nogmaals de naam van de deelnemer in die zich inschrijft en zijn/haar
+          groep.</h2>
+      </li>
+      <li>
+        <h2><span>GEEN betaling is GEEN aanmelding!</span></h2>
+      </li>
+      <li>
+        <h2>Kijk voor de zekerheid op je bankrekening of het bedrag is betaald en stuur een appje naar Gina Armanyous
+          via <a href="#telephoneNumber" class="telephoneNumberAnchor">de onderstaande telefoonnummer</a> zodra het is
+          gelukt.</h2>
+      </li>
+      <li>
+        <h2>Alle velden met een <span class="requiredField">*</span> in dit formulier zijn verplicht in te vullen.</h2>
+      </li>
+      <li>
+        <h2><span>(LET OP! Dit formulier is per deelnemer. Als je meer deelnemers wilt aanmelden, moet je meerdere keren
+            het formulier invullen en betalen!)</span></h2>
+      </li>
+      <li>
+        <h2>Problemen met aanmelden? Neem contact op met Gina Hanna via haar telefoonnummer: <a href="tel:+31610061549"
+            id="telephoneNumber">06 100 61 549</a></h2>
+      </li>
+    </ul>
+    <form id="form" action="php/contactform.php" method="POST" target="_self">
+
+      <!-- Deelnemergegevens -->
+
+      <div class="row">
+        <div class="col-25">
+          <label for="group"><span class="requiredField">*</span>Leerjaar:</label>
+        </div>
+        <div class="col-75">
+          <select id="group" name="groep" onchange="toggleJaarInput()" required>
+            <option value="">-- Selecteer leerjaar --</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="anders">Anders</option>
+          </select>
+          <input type="text" id="jaarAnders" name="jaarAnders" class="conditional-input"
+            placeholder="Vul leerjaar in" style="display: none; margin-top: 10px;">
+          <div class="error-msg" id="err-group" style="display: none;">Leerjaar is verplicht</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="firstNameChild"><span class="requiredField">*</span>Voornaam Deelnemer:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="firstNameChild" name="voornaamDeelnemer" placeholder="Vul hier de voornaam in"
+            required>
+          <div class="error-msg" id="err-firstNameChild" style="display: none;">Voornaam is verplicht</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="middleNameChild">Tussenvoegsel Deelnemer:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="middleNameChild" name="tussenvoegselsDeelnemer"
+            placeholder="Bijv. van, de, den (optioneel)">
+          <div class="error-msg" id="err-middleNameChild" style="display: none;">Tussenvoegsel mag alleen letters bevatten</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="lastNameChild"><span class="requiredField">*</span>Achternaam Deelnemer:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="lastNameChild" name="achternaamDeelnemer" placeholder="Vul hier de achternaam in"
+            required>
+          <div class="error-msg" id="err-lastNameChild" style="display: none;">Achternaam is verplicht</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="phoneNrChild"><span class="requiredField">*</span>Telefoonnummer Deelnemer:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="phoneNrChild" name="telefoonnummerDeelnemer"
+            placeholder="Vul hier het telefoonnummer in van de deelnemer" required>
+          <div class="error-msg" id="err-phoneNrChild" style="display: none;">Telefoonnummer is verplicht en mag alleen nummers bevatten (minimaal 10 cijfers)</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="eMailChild"><span class="requiredField">*</span>E-mail Deelnemer:</label>
+        </div>
+        <div class="col-75">
+          <input type="email" id="eMailChild" name="emailDeelnemer"
+            placeholder="Vul hier het E-mailadres in van de deelnemer" required>
+          <div class="error-msg" id="err-eMailChild" style="display: none;">Vul alstublieft een geldig e-mailadres in</div>
+        </div>
+      </div>
+
+      <!-- Oudergegevens -->
+
+      <div class="row">
+        <div class="col-25">
+          <label for="firstNameParent"><span class="requiredField">*</span>Voornaam Ouder:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="firstNameParent" name="voornaamOuder" placeholder="Vul hier de voornaam in" required>
+          <div class="error-msg" id="err-firstNameParent" style="display: none;">Voornaam is verplicht</div>
+        </div>
+      </div>
+      
+      <div class="row">
+        <div class="col-25">
+          <label for="middleNameParent">Tussenvoegsel Ouder:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="middleNameParent" name="tussenvoegselsOuder"
+            placeholder="Bijv. van, de, den (optioneel)">
+          <div class="error-msg" id="err-middleNameParent" style="display: none;">Tussenvoegsel mag alleen letters bevatten</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="lastNameParent"><span class="requiredField">*</span>Achternaam Ouder:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="lastNameParent" name="achternaamOuder" placeholder="Vul hier de achternaam in"
+            required>
+          <div class="error-msg" id="err-lastNameParent" style="display: none;">Achternaam is verplicht</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="phoneNrParent">Telefoonnummer Ouder:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="phoneNrParent" name="telefoonnummerOuder"
+            placeholder="Vul hier het telefoonummer in van de ouder">
+          <div class="error-msg" id="err-phoneNrParent" style="display: none;">Telefoonnummer mag alleen nummers bevatten (minimaal 10 cijfers)</div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-25">
+          <label for="eMailParent"><span class="requiredField">*</span>E-mail Ouder:</label>
+        </div>
+        <div class="col-75">
+          <input type="email" id="eMailParent" name="emailOuder"
+            placeholder="Vul hier het E-mailadres in van de ouder" required>
+          <div class="error-msg" id="err-eMailParent" style="display: none;">Vul alstublieft een geldig e-mailadres in</div>
+        </div>
+      </div>
+
+      <!-- Betalinggegevens -->
+
+      <div class="row">
+        <div class="col-25">
+          <label for="iBAN"><span class="requiredField">*</span>IBAN:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" id="iBAN" name="iBAN"
+            placeholder="Vul hier het bankrekeningnummer in waarmee wordt betaald" required>
+          <div class="error-msg" id="err-iBAN" style="display: none;">IBAN is verplicht</div>
+        </div>
+      </div>
+
+      <button id="submitButton" type="submit">Verzend gegevens</button>
+
+    </form>
+  </main>
+
+  <script>
+
+    function toggleJaarInput() {
+      const group = document.getElementById('group');
+      const jaarAnders = document.getElementById('jaarAnders');
+      if (group.value === 'anders') {
+        jaarAnders.style.display = 'block';
+        jaarAnders.required = true;
+      } else {
+        jaarAnders.style.display = 'none';
+        jaarAnders.required = false;
+        jaarAnders.value = ''; // Reset waarde
+      }
+    }
+
+    // Input validatie voor jaarAnders - alleen cijfers, max 2 karakters
+    const jaarAndersField = document.getElementById('jaarAnders');
+    if (jaarAndersField) {
+      jaarAndersField.addEventListener('input', function () {
+        this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2);
+      });
+    }
+
+    // Validatiefuncties
+    function isValidFirstName(name) {
+      return /^[a-zàáâäãåæçèéêëìíîïðñòóôõöøùúûüýþÿ\s'-]{2,}$/i.test(name.trim());
+    }
+
+    function isValidLastName(name) {
+      return /^[a-zàáâäãåæçèéêëìíîïðñòóôõöøùúûüýþÿ\s'-]{2,}$/i.test(name.trim());
+    }
+
+    function isValidMiddleName(name) {
+      if (!name) return true; // Optioneel
+      return /^[a-zàáâäãåæçèéêëìíîïðñòóôõöøùúûüýþÿ\s'-]{1,}$/i.test(name.trim());
+    }
+
+    function isValidPhone(phone) {
+      if (!phone || !phone.trim()) return false; // Telefoon is nu verplicht voor deelnemer
+      return /^[\d\s\-()]+$/.test(phone) && phone.replace(/[\s\-()]/g, '').length >= 10;
+    }
+
+    function isValidPhoneOptional(phone) {
+      if (!phone) return true; // Telefoon ouder blijft optioneel
+      return /^[\d\s\-()]+$/.test(phone) && phone.replace(/[\s\-()]/g, '').length >= 10;
+    }
+
+    function isValidEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+    }
+
+    function validateField(fieldId, validator) {
+      const field = document.getElementById(fieldId);
+      const errorMsg = document.getElementById('err-' + fieldId);
+      
+      // Alleen valideren als veld is ingevuld (niet leeg) of als het required is
+      if (!field.value && !field.required) {
+        field.classList.remove('invalid');
+        errorMsg.style.display = 'none';
+        return true;
+      }
+      
+      const isValid = validator(field.value);
+
+      if (isValid) {
+        field.classList.remove('invalid');
+        errorMsg.style.display = 'none';
+      } else {
+        field.classList.add('invalid');
+        errorMsg.style.display = 'block';
+      }
+      return isValid;
+    }
+
+    // Event listeners voor realtime validatie - ALLEEN NA INPUT
+    document.getElementById('firstNameChild').addEventListener('blur', () => {
+      if (document.getElementById('firstNameChild').value) validateField('firstNameChild', isValidFirstName);
+    });
+    document.getElementById('lastNameChild').addEventListener('blur', () => {
+      if (document.getElementById('lastNameChild').value) validateField('lastNameChild', isValidLastName);
+    });
+    document.getElementById('middleNameChild').addEventListener('blur', () => {
+      if (document.getElementById('middleNameChild').value) validateField('middleNameChild', isValidMiddleName);
+    });
+    document.getElementById('phoneNrChild').addEventListener('blur', () => {
+      validateField('phoneNrChild', isValidPhone);
+    });
+    document.getElementById('eMailChild').addEventListener('blur', () => {
+      if (document.getElementById('eMailChild').value) validateField('eMailChild', isValidEmail);
+    });
+
+    document.getElementById('firstNameParent').addEventListener('blur', () => {
+      if (document.getElementById('firstNameParent').value) validateField('firstNameParent', isValidFirstName);
+    });
+    document.getElementById('lastNameParent').addEventListener('blur', () => {
+      if (document.getElementById('lastNameParent').value) validateField('lastNameParent', isValidLastName);
+    });
+    document.getElementById('middleNameParent').addEventListener('blur', () => {
+      if (document.getElementById('middleNameParent').value) validateField('middleNameParent', isValidMiddleName);
+    });
+    document.getElementById('phoneNrParent').addEventListener('blur', () => {
+      if (document.getElementById('phoneNrParent').value) validateField('phoneNrParent', isValidPhoneOptional);
+    });
+    document.getElementById('eMailParent').addEventListener('blur', () => {
+      if (document.getElementById('eMailParent').value) validateField('eMailParent', isValidEmail);
+    });
+
+    // Form submit validatie - STRENGER
+    document.getElementById('form').addEventListener('submit', function (e) {
+      let isValid = true;
+
+      // Leerjaar validatie
+      const group = document.getElementById('group');
+      const jaarAnders = document.getElementById('jaarAnders');
+      if (!group.value || (group.value === 'anders' && !jaarAnders.value.trim())) {
+        group.classList.add('invalid');
+        document.getElementById('err-group').style.display = 'block';
+        isValid = false;
+      } else {
+        group.classList.remove('invalid');
+        document.getElementById('err-group').style.display = 'none';
+      }
+
+      // Verplichte velden voor deelnemer
+      if (!validateField('firstNameChild', isValidFirstName)) isValid = false;
+      if (!validateField('lastNameChild', isValidLastName)) isValid = false;
+      if (!validateField('middleNameChild', isValidMiddleName)) isValid = false;
+      if (!validateField('eMailChild', isValidEmail)) isValid = false;
+
+      // Verplichte velden voor ouder
+      if (!validateField('firstNameParent', isValidFirstName)) isValid = false;
+      if (!validateField('lastNameParent', isValidLastName)) isValid = false;
+      if (!validateField('middleNameParent', isValidMiddleName)) isValid = false;
+      if (!validateField('eMailParent', isValidEmail)) isValid = false;
+
+      // Telefoon validatie
+      if (!validateField('phoneNrChild', isValidPhone)) isValid = false;
+      if (!validateField('phoneNrParent', isValidPhoneOptional)) isValid = false; // Optioneel voor ouder
+
+      if (!isValid) {
+        e.preventDefault();
+        alert('Corrigeer alstublieft de fouten in het formulier. Alle verplichte velden moeten ingevuld zijn.');
+      }
+    });
+  </script>
+
+</body>
+
+</html>
