@@ -1,0 +1,36 @@
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local environment
+.env
+.env.*
+config.local.php
+
+# Logs & temp
+*.log
+tmp/
+cache/
+
+# Uploads / generated files
+uploads/
+storage/
+public/uploads/
+public/storage/
+
+# Dependencies (if you ever use Composer)
+vendor/
+
+# Local databases / exports
+*.sqlite
+*.db
+*.csv
+*.zip
+
+# App config (do not commit secrets)
+php/config.php
+
+# App data (local registrations)
+php/registrations.json

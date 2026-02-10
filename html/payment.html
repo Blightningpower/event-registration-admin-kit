@@ -1,56 +1,59 @@
-<!DOCTYPE html>
-<html lang="nl">
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#4b0082" />
 
-<head>
+    <title>Payment - Event Registration</title>
 
-  <title>Betaling Kerkkamp 2026</title>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/branding/favicon_io/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/branding/favicon_io/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/branding/favicon_io/favicon-16x16.png" />
+    <link rel="icon" href="../assets/branding/favicon_io/favicon.ico" />
 
-  <!--links for the Favicons-->
-  <link rel="apple-touch-icon" sizes="180x180" href="../img/favicon_io/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon_io/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon_io/favicon-16x16.png">
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
 
-  <!--metatags for responsiveness-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="HandheldFriendly" content="true">
-  <meta charset="utf-8">
+  <body>
+    <main>
+      <h1 class="paymentText">Your details were submitted successfully.</h1>
+      <h2 class="paymentText">Complete your registration by clicking the payment button below.</h2>
 
-  <!-- Stylesheets -->
-  <link rel="stylesheet" href="../css/style.css">
+      <ul>
+        <li>
+          <p>
+            In the payment description, please include the participant's full name and additional details (e.g., grade/group)
+            to help us match your payment.
+          </p>
+        </li>
 
-</head>
+        <li>
+          <p><span>No payment = no registration.</span></p>
+        </li>
 
-<body onload="alert('Je gegevens zijn verzonden. Klik nu op de betaalknop om je inschrijving te voltooien')">
+        <li>
+          <p>Please double-check in your banking app that the payment was completed.</p>
+        </li>
 
-  <h1 class="paymentText">Klik op de betaalknop om te betalen en dan is je aanmelding compleet</h1>
+        <li>
+          <p>Once payment is done, contact the organizer to confirm (WhatsApp/SMS).</p>
+        </li>
 
-  <br><br>
+        <li>
+          <p>
+            Payment issues? Contact the organizer:
+            <a href="tel:+31600000000" id="telephoneNumber">+31 6 0000 0000</a>
+          </p>
+        </li>
+      </ul>
 
-  <ul>
-    <li>
-      <h2>Vul in de beschrijving van de betaling nogmaals de naam van de deelnemer in die zich inschrijft en zijn/haar
-        en schooljaar.</h2>
-    </li>
-    <li>
-      <h2><span>GEEN betaling is GEEN aanmelding!</span></h2>
-    </li>
-    <li>
-      <h2>Kijk voor de zekerheid op je bankrekening of het bedrag is betaald.</h2>
-    </li>
-    <li>
-      <h2>Stuur een appje naar Gina Hanna zodra het is gelukt.</h2>
-    </li>
-    <li>
-      <h2>Problemen met betalen? Neem contact op met Gina Hanna via haar telefoonnummer: <a
-          href="tel:+31610061549" id="telephoneNumber">06 100 61 549</a></h2>
-    </li>
-  </ul>
-
-  <a href="https://www.ing.nl/payreq/m/?trxid=BdDYvmXGVIWm0M62KFQU35LR4mwgXPyG"
-    id="payment-button">Betalen</a>
-
-</body>
-
+      <!-- Replace the URL below with your payment link (e.g., Tikkie / bank payment request) -->
+      <a href="https://example.com/payment-link" id="payment-button" target="_blank" rel="noopener noreferrer">
+        Pay Now
+      </a>
+    </main>
+  </body>
 </html>

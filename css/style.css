@@ -1,333 +1,274 @@
-/* Code applied to all standard HTML element tags */
-* {
-  text-decoration: none;
-  font-family: 'Tangerine', cursive;
-  /* Changed font to a Christmas-themed font */
-  margin: 0;
-  padding: 0;
+/* =========================================================
+   Event Registration Admin Kit - Professional Base Styles
+   ========================================================= */
+
+/* ---------- Theme Variables ---------- */
+:root {
+  --bg: #f5f7fb;
+  --surface: #ffffff;
+  --surface-muted: #f0f3f9;
+
+  --text: #111827;
+  --text-muted: #6b7280;
+
+  --primary: #4b0082;        /* brand accent */
+  --primary-contrast: #ffffff;
+
+  --border: #e5e7eb;
+  --focus: rgba(75, 0, 130, 0.25);
+
+  --danger: #dc2626;
+  --success: #16a34a;
+
+  --btn-primary: #4b0082;
+  --btn-primary-hover: #3a0066;
+
+  --btn-pay: #16a34a;
+  --btn-pay-hover: #15803d;
+
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
 }
 
-/* Media query for screens with a maximum width of 767px (typical for mobile devices) */
-@media only screen and (max-width: 767px) {
-  * {
-    font-family: sans-serif;
-    font-style: oblique;
-  }
+/* ---------- Reset ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 html,
 body {
-  background-color: #d8ffd8;
-  /* Changed background color to a light green */
-  text-align: center;
-  font-family: 'Tangerine', cursive;
-  float: unset;
+  height: 100%;
+}
+
+body {
   margin: 0;
-  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  line-height: 1.5;
 }
 
-header {
-  background-color: #4b0082;
-  /* Changed header background color to indigo */
-  color: #ffd700;
-  /* Changed header text color to gold */
-  top: 0;
-  position: fixed;
-  min-width: -webkit-fill-available;
-  max-height: 15vh;
-  width: 100%;
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 6px 12px rgba(0, 0, 0, 0.2);
+/* Remove default link styling (we will style where needed) */
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-h1 {
-  font-size: 2.7vw;
-}
-
+/* ---------- Layout ---------- */
 main {
-  margin: 5vh auto 0 auto;
-  padding: 0 16px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-content: space-between;
-  flex-wrap: wrap;
+  width: min(900px, calc(100% - 32px));
+  margin: 96px auto 48px;
+  padding: 24px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* Optional: if you use a fixed header elsewhere */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 14px 16px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  z-index: 50;
+}
+
+/* ---------- Typography ---------- */
+h1 {
+  font-size: clamp(24px, 3vw, 34px);
+  margin: 0 0 10px;
+  letter-spacing: -0.02em;
 }
 
 h2 {
-  font-size: large;
-  text-align: left;
-  color: #8b0000;
-  /* Changed h2 text color to dark red */
-  margin: revert;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text);
+}
+
+.paymentText {
+  margin-top: 0;
+  color: var(--text);
 }
 
 span {
-  font-size: large;
-  color: #ff4500;
-  /* Changed span text color to orange-red */
+  color: var(--danger);
+  font-weight: 700;
 }
 
+/* ---------- Lists ---------- */
 ul {
-  padding: 5rem 3rem 3rem;
-  margin: 0;
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
 }
 
-@media only screen and (max-width: 500px) {
-
-
-  ul {
-    padding: 0;
-    margin: 0;
-  }
+ul li {
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
 }
 
-/* Code applied to all HTML elements with an ID */
-
-::placeholder {
-  text-align: center;
+/* ---------- Forms ---------- */
+form {
+  margin: 18px 0 0;
 }
 
-.blueText {
-  color: #0000ff;
-  /* Changed blueText color to blue */
+label {
+  display: inline-block;
+  margin: 10px 0 6px;
+  font-weight: 600;
+  color: var(--text);
 }
 
-.blackText {
-  color: #000000;
-  /* Changed blackText color to black */
+input,
+select,
+textarea {
+  width: 100%;
+  max-width: 520px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font-size: 14px;
+  outline: none;
 }
 
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--focus);
+}
+
+/* Keep legacy IDs functional, but avoid huge fixed widths */
+#level,
+#group,
+#iBAN {
+  max-width: 520px;
+}
+
+/* Optional: legacy min-width IDs can remain, but this makes layout responsive */
+#nChild,
+#nParent,
+#phoneNrChild,
+#phoneNrParent,
+#eMailChild,
+#eMailParent {
+  max-width: 520px;
+}
+
+/* ---------- Buttons ---------- */
+#submitButton,
 #payment-button {
-  padding: 10px 20px;
-  background-color: #080;
-  color: white;
-  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-weight: 700;
   cursor: pointer;
-  border: 2px solid black;
-  margin: auto;
+  transition: transform 120ms ease, background-color 120ms ease, box-shadow 120ms ease;
 }
 
-#payment-button a {
-  color: white;
+/* Primary submit */
+#submitButton {
+  background: var(--btn-primary);
+  color: var(--primary-contrast);
+}
+
+#submitButton:hover {
+  background: var(--btn-primary-hover);
+  transform: translateY(-1px);
+}
+
+#submitButton:active {
+  transform: translateY(0);
+}
+
+/* Payment button */
+#payment-button {
+  background: var(--btn-pay);
+  color: #fff;
+  margin-top: 18px;
+  min-width: 140px;
 }
 
 #payment-button:hover {
-  background-color: #008;
-  color: white;
+  background: var(--btn-pay-hover);
+  transform: translateY(-1px);
 }
 
-#payment-button:hover {
-  background-color: #800;
-  color: white;
+/* ---------- Validation ---------- */
+.requiredField {
+  color: var(--danger);
+  font-weight: 700;
 }
 
+.error-msg {
+  color: var(--danger);
+  font-size: 12px;
+  margin-top: 6px;
+  display: none;
+}
+
+input.invalid,
+select.invalid,
+textarea.invalid {
+  border-color: var(--danger) !important;
+}
+
+/* ---------- Conditional Inputs ---------- */
+.hiddenInput,
+.conditional-input {
+  display: none;
+}
+
+.hiddenInput.show,
+.conditional-input.show {
+  display: block;
+}
+
+/* ---------- Phone link ---------- */
 #telephoneNumber,
 .telephoneNumberAnchor {
-  color: #ff0000;
-  font-style: italic;
+  color: var(--primary);
+  font-weight: 700;
   text-decoration: underline;
 }
 
 #telephoneNumber:hover,
 .telephoneNumberAnchor:hover {
-  color: #080;
+  color: var(--btn-pay);
 }
 
-span {
-  font-size: large;
-  color: #ff6363;
-  /* Red text */
-}
+/* ---------- Small screens ---------- */
+@media (max-width: 520px) {
+  main {
+    margin-top: 72px;
+    padding: 18px;
+  }
 
-form {
-  margin: 1rem auto 2rem;
-}
-
-label {
-  font-size: large;
-  color: #ffcc00;
-}
-
-#transportation,
-input {
-  padding: 1%;
-  border-radius: 3px;
-  color: #8b0000;
-  background-color: #c0ffee;
-}
-
-input[type] {
-  text-align: center;
-  border: 2px solid;
-  min-width: -webkit-fill-available;
-}
-
-.col-25 {
-  margin-bottom: 5px;
-}
-
-.row {
-  margin-top: 3%;
-}
-
-#level {
-  min-width: 19rem;
-  padding: 1%;
-  border-radius: 3px;
-  color: #8b0000;
-  background-color: #c0ffee;
-}
-
-#group {
-  min-width: 19rem;
-  padding: 1%;
-  border-radius: 3px;
-  color: #8b0000;
-  background-color: #c0ffee;
-}
-
-#nChild {
-  min-width: 26rem;
-}
-
-#nParent {
-  min-width: 31rem;
-}
-
-#phoneNrChild {
-  min-width: 23rem;
-}
-
-#phoneNrParent {
-  min-width: 29rem;
-}
-
-#eMailChild {
-  min-width: 21rem;
-}
-
-#eMailParent {
-  min-width: 27rem;
-}
-
-::placeholder {
-  text-align: center;
-  color: #8b0000;
-  font-size: medium;
-  margin: auto;
-}
-
-#submitButton {
-  padding: 10px 20px;
-  background-color: #e44d26;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: inherit;
-  margin-top: 10%;
-}
-
-#submitButton:hover {
-  background-color: #bf4021;
-  /* Darker red on hover */
-  color: #fff;
-}
-
-#submitButton:active {
-  background-color: #992b1a;
-  /* Even darker red on click */
-  color: #fff;
-}
-
-#transportation {
-  max-width: fit-content;
-  padding: 1%;
-  margin: auto;
-}
-
-#iBAN {
-  min-width: 27rem;
-  background-color: #c0ffee;
-  /* Light green background */
-  border-radius: 3px;
-  padding: 1%;
-}
-
-#iBAN::placeholder {
-  font-size: 15px;
-}
-
-.paymentText {
-  margin-top: 3rem;
-  color: #8b0000;
-}
-
-.requiredField {
-  color: red;
-}
-
-select {
-  padding: 1%;
-  border-radius: 3px;
-  border: 2px solid #8b0000;
-  color: #8b0000;
-  background-color: #c0ffee;
-  font-size: inherit;
-  cursor: pointer;
-  min-width: 19rem;
-  text-align: center;
-}
-
-select:hover {
-  background-color: #b0eeee;
-  border-color: #ff4500;
-}
-
-select:focus {
-  outline: none;
-  box-shadow: 0 0 5px #4b0082;
-  border-color: #4b0082;
-}
-
-.hiddenInput {
-  display: none;
-  margin-top: 10px;
-  padding: 1%;
-  border-radius: 3px;
-  border: 2px solid #8b0000;
-  color: #8b0000;
-  background-color: #c0ffee;
-  text-align: center;
-  min-width: 19rem;
-}
-
-.hiddenInput.show {
-  display: block;
-}
-
-.col-75 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.error-msg {
-  color: #f44336;
-  font-size: 12px;
-  margin-top: 5px;
-  display: none;
-}
-
-input.invalid,
-select.invalid {
-  border-color: #f44336 !important;
-}
-
-.conditional-input {
-  display: none;
-}
-
-.conditional-input.show {
-  display: block;
+  ul li {
+    padding: 10px 12px;
+  }
 }

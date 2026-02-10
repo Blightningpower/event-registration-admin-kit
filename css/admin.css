@@ -1,0 +1,143 @@
+/* =========================================================
+   Admin Dashboard - Registrations
+   ========================================================= */
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+  gap: 12px;
+  margin: 16px 0 10px;
+}
+
+.stat {
+  background: var(--surface-muted, #f0f3f9);
+  border: 1px solid var(--border, #e5e7eb);
+  border-radius: 10px;
+  padding: 12px;
+}
+
+.stat strong {
+  display: block;
+  font-size: 22px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 14px;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--border, #e5e7eb);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: var(--surface-muted, #f0f3f9);
+  font-size: 13px;
+  color: var(--text, #111827);
+}
+
+tr:hover {
+  background: #fafafa;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.pill.pending {
+  background: rgba(245, 158, 11, 0.12);
+  color: #92400e;
+}
+
+.pill.accepted {
+  background: rgba(22, 163, 74, 0.12);
+  color: #166534;
+}
+
+.pill.rejected {
+  background: rgba(220, 38, 38, 0.12);
+  color: #991b1b;
+}
+
+.pill.paid {
+  background: rgba(22, 163, 74, 0.12);
+  color: #166534;
+}
+
+.pill.unpaid {
+  background: rgba(107, 114, 128, 0.12);
+  color: #374151;
+}
+
+.pill.refunded {
+  background: rgba(59, 130, 246, 0.12);
+  color: #1e3a8a;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.btn {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border, #e5e7eb);
+  background: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.btn.primary {
+  background: var(--btn-primary, #4b0082);
+  color: #fff;
+  border-color: transparent;
+}
+
+.btn.danger {
+  background: #dc2626;
+  color: #fff;
+  border-color: transparent;
+}
+
+.btn.green {
+  background: #16a34a;
+  color: #fff;
+  border-color: transparent;
+}
+
+.btn.gray {
+  background: #6b7280;
+  color: #fff;
+  border-color: transparent;
+}
+
+.muted {
+  color: var(--text-muted, #6b7280);
+  font-size: 12px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
