@@ -69,9 +69,11 @@
               class="conditional-input"
               placeholder="Enter group/grade"
               inputmode="numeric"
+              maxlength="2"
             />
 
             <div class="error-msg" id="err-group">Group/grade is required.</div>
+            <div class="error-msg" id="err-customGroup">Enter 1-2 digits only.</div>
           </div>
         </div>
 
@@ -104,7 +106,7 @@
               type="text"
               id="participantMiddleName"
               name="participant_middle_name"
-              placeholder="e.g., van, de, den"
+              placeholder="Middle name (optional)"
               autocomplete="additional-name"
             />
             <div class="error-msg" id="err-participantMiddleName">Only letters/spaces are allowed.</div>
@@ -192,7 +194,7 @@
               type="text"
               id="guardianMiddleName"
               name="guardian_middle_name"
-              placeholder="e.g., van, de, den"
+              placeholder="Middle name (optional)"
               autocomplete="additional-name"
             />
             <div class="error-msg" id="err-guardianMiddleName">Only letters/spaces are allowed.</div>
@@ -298,11 +300,14 @@
       const customGroupInput = $('customGroup');
 
       function toggleCustomGroup() {
-        const isOther = groupSelect.value === 'anders';
+        const isOther = groupSelect.value === 'other';
         customGroupInput.classList.toggle('show', isOther);
         customGroupInput.style.display = isOther ? 'block' : 'none';
         customGroupInput.required = isOther;
-        if (!isOther) customGroupInput.value = '';
+        if (!isOther) {
+          customGroupInput.value = '';
+          showError(customGroupInput, $('err-customGroup'), false);
+        }
       }
       toggleCustomGroup();
       groupSelect.addEventListener('change', toggleCustomGroup);
@@ -323,10 +328,21 @@
         return v.trim().length >= 10; // keep it light; server handles stronger checks if desired
       }
 
+      function isValidCustomGroup(v) {
+        return /^\d{1,2}$/.test(v.trim());
+      }
+
       // ---------- Field config ----------
       const fields = [
-        { id: 'group', err: 'err-group', validate: () => groupSelect.value !== '' && (groupSelect.value !== 'anders' || customGroupInput.value.trim() !== '') },
-
+        { id: 'group', err: 'err-group', validate: () => {
+          if (groupSelect.value === '') return false;
+          if (groupSelect.value === 'other') {
+            const customValid = isValidCustomGroup(customGroupInput.value);
+            showError(customGroupInput, $('err-customGroup'), !customValid);
+            return customValid;
+          }
+          return true;
+        }},
         { id: 'participantFirstName', err: 'err-participantFirstName', validate: (v) => isValidName(v) },
         { id: 'participantMiddleName', err: 'err-participantMiddleName', validate: (v) => isValidMiddle(v) },
         { id: 'participantLastName', err: 'err-participantLastName', validate: (v) => isValidName(v) },
@@ -352,6 +368,19 @@
           const ok = validate(field.value);
           showError(field, errEl, !ok);
         });
+      });
+
+      // Add validation for custom group field
+      customGroupInput.addEventListener('blur', () => {
+        if (groupSelect.value === 'other') {
+          const valid = isValidCustomGroup(customGroupInput.value);
+          showError(customGroupInput, $('err-customGroup'), !valid);
+        }
+      });
+
+      // Prevent non-numeric input in custom group
+      customGroupInput.addEventListener('input', (e) => {
+        e.target.value = e.target.value.replace(/[^\d]/g, '');
       });
 
       // Submit validation

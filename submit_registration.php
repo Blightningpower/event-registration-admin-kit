@@ -38,6 +38,15 @@ function clean_iban(string $value): string {
   return $value;
 }
 
+function clean_numeric_string(string $value, int $maxLen = 2): string {
+  $value = trim($value);
+  $value = preg_replace('/[^\d]/', '', $value) ?? '';
+  if (strlen($value) > $maxLen) {
+    $value = substr($value, 0, $maxLen);
+  }
+  return $value;
+}
+
 function post_value(string $key): string {
   $v = $_POST[$key] ?? '';
   return is_string($v) ? $v : '';
@@ -47,7 +56,7 @@ function post_value(string $key): string {
  * Fields
  */
 $group        = clean_string(post_value('group'));
-$customGroup  = clean_string(post_value('custom_group'));
+$customGroup  = clean_numeric_string(post_value('custom_group'));
 
 $participantFirstName  = clean_string(post_value('participant_first_name'));
 $participantMiddleName = clean_string(post_value('participant_middle_name'));
@@ -74,8 +83,12 @@ $groupDisplay = ($isOtherGroup || $group === '') ? $customGroup : $group;
  */
 $errors = [];
 
-if ($groupDisplay === '') $errors[] = 'Group/grade is required.';
+if ($group === '') $errors[] = 'Group/grade is required.';
 if ($isOtherGroup && $customGroup === '') $errors[] = 'Custom group/grade is required.';
+if ($isOtherGroup && !preg_match('/^\d{1,2}$/', $customGroup)) {
+  $errors[] = 'Custom group/grade must be 1-2 digits.';
+}
+if ($groupDisplay === '') $errors[] = 'Group/grade display value is invalid.';
 
 if ($participantFirstName === '') $errors[] = 'Participant first name is required.';
 if ($participantLastName === '') $errors[] = 'Participant last name is required.';
@@ -140,7 +153,7 @@ if (!$sent) {
 /**
  * Persist registration (JSON)
  */
-$dataFile = __DIR__ . '/php/registrations.json';
+$dataFile = __DIR__ . '/registrations.json';
 
 $items = [];
 if (file_exists($dataFile)) {

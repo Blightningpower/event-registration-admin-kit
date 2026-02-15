@@ -5,9 +5,9 @@ Lightweight PHP event registration kit with email notifications and an admin das
 ## Requirements
 
 - PHP 8.0+ recommended
-- A server that can send email via `mail()` (shared hosting usually works)
+- Web hosting that can send email via `mail()` (shared hosting often works)
 
-> If `mail()` is not available on your host, you can replace it later with SMTP (PHPMailer) or an API provider.
+> If `mail()` is not available on your host, you can replace it later with SMTP (PHPMailer) or an email API provider.
 
 ## Quick Start
 
@@ -19,135 +19,161 @@ Copy the example config file:
 cp php/config.example.php php/config.php
 ```
 
-Edit [php/config.php](php/config.php):
+Edit `php/config.php`:
 
-- `APP_FROM_EMAIL` — sender address (must be a valid domain email, e.g., `noreply@yourdomain.com`)
+- `APP_FROM_EMAIL` — sender address (use a domain email, e.g. `noreply@yourdomain.com`)
 - `APP_FROM_NAME` — sender name
-- `APP_NOTIFY_EMAIL` — where registrations should be sent
+- `APP_NOTIFY_EMAIL` — inbox that receives new registrations
 - `APP_EVENT_SUBJECT` — email subject
-- `APP_PAYMENT_PAGE` — where to redirect after submit
+- `APP_PAYMENT_PAGE` — redirect location after submit (e.g. `html/payment.html`)
 - `APP_ADMIN_KEY` — admin key for dashboard protection (set to `''` to disable)
 
-**Important:** Add `php/config.php` to [.gitignore](.gitignore) (it may contain sensitive data and should not be committed).
+**Important:** keep `php/config.php` out of version control (it may contain sensitive values).
+This repository includes a `.gitignore` that already excludes it.
 
-### 2) Set File Permissions
+### 2) Add Your Payment Link (payment.html)
 
-The `php/` folder must be writable so the app can create and update `registrations.json`.
+After a user submits the form, they are redirected to the payment page.
+
+Open:
+
+- `html/payment.html`
+
+Find the payment button/link and replace the URL with your own payment request link (e.g. Tikkie, ING Pay Request, Mollie, etc.):
+
+```html
+<a
+  href="https://example.com/your-payment-link"
+  id="payment-button"
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  Pay Now
+</a>
+```
+
+That's it — the app does not process payments itself; it simply redirects users to your external payment link.
+
+### 3) File Permissions (hosting)
+
+The app stores registrations in `registrations.json` (in the project root).
+Your hosting must allow PHP to write to this file.
 
 #### How to recognize permission issues
 
 - You get a `500` error
-- You see errors like `file_put_contents(): Failed to open stream: Permission denied`
-- The registration form submits but data is not saved
+- You see `file_put_contents(): Failed to open stream: Permission denied`
+- The form submits but no data is saved
 
-#### Fix (typical Linux hosting via SSH)
+### Typical fix (Linux hosting via SSH)**
 
 ```bash
-chmod 755 php/
-touch php/registrations.json
-chmod 664 php/registrations.json
+chmod 664 registrations.json
 ```
 
-#### Alternative (via FTP or cPanel File Manager)
+If your host requires folder permissions too, you can also ensure the project folder is writable for the web user.
 
-1. Right-click on the `php/` folder
-2. Select "Change Permissions" or "File Permissions"
-3. Set folder permissions to `755` (rwxr-xr-x)
-4. Create an empty `registrations.json` file inside `php/`
-5. Set file permissions to `664` (rw-rw-r--)
+### 4) Upload to Your Server
 
-### 3) Upload to Your Server
+Upload the entire project to your web hosting (FTP / cPanel File Manager).
 
-Upload all files to your web hosting via FTP or cPanel File Manager:
+- Place `index.html` in your public web root
+- Keep the folder structure intact (`css/`, `html/`, `php/`, `assets/`)
 
-- Place [index.html](index.html) in your public web root
-- Keep the folder structure intact (css/, html/, php/, assets/)
+### 5) Test the Registration Form
 
-### 4) Test the Registration Form
+1. Open your website (e.g. `https://yourdomain.com/`)
+2. Fill out the form and submit
+3. Expected:
+   - An email arrives at `APP_NOTIFY_EMAIL`
+   - A new entry is appended to `registrations.json`
+   - The user is redirected to the payment page (`html/payment.html`)
 
-1. Open your website in a browser (e.g., `https://yourdomain.com/`)
-2. Fill out the registration form
-3. Submit and verify:
-   - You receive an email at `APP_NOTIFY_EMAIL`
-   - A new entry appears in `php/registrations.json`
-   - You are redirected to the payment page
+### 6) Admin Dashboard
 
-### 5) Access the Admin Dashboard
-
-Navigate to:
+Open:
 
 ```text
 https://yourdomain.com/php/overview_registrations.php
 ```
 
-If you set an `APP_ADMIN_KEY`, add it to the URL:
+If you set `APP_ADMIN_KEY`, add it:
 
 ```text
 https://yourdomain.com/php/overview_registrations.php?key=YOUR_KEY
 ```
 
-From here you can:
+Dashboard features:
 
-- Accept or reject registrations
-- Mark payments as paid/unpaid/refunded
+- Accept / reject registrations
+- Mark payment as `paid` / `unpaid` / `refunded`
 - Delete registrations
-- View statistics
+- View basic statistics
 
 ## File Structure
 
 ```text
-├── index.html                      # Main registration form
-├── submit_registration.php          # Form handler (sends email, saves data)
-├── html/
-│   └── payment.html                # Payment instructions page
-├── php/
-│   ├── config.example.php          # Example configuration
-│   ├── config.php                  # Your actual config (not in git)
-│   ├── overview_registrations.php  # Admin dashboard
-│   └── registrations.json          # Stored registrations (auto-created)
+├── index.html
+├── submit_registration.php          # form handler (sends email, saves data)
+├── registrations.json               # JSON storage (created/updated by the app)
 ├── css/
-│   ├── style.css                   # Main styles
-│   └── admin.css                   # Admin dashboard styles
+│   ├── style.css
+│   └── admin.css
+├── html/
+│   └── payment.html                 # payment instructions + payment link
+├── php/
+│   ├── config.example.php
+│   ├── config.php                   # created by you (do not commit)
+│   └── overview_registrations.php   # admin dashboard
 └── assets/
     └── branding/
-        └── favicon_io/             # Favicon files
+        └── favicon_io/
 ```
 
 ## Security Notes
 
-1. **Protect your config file:** Never commit [php/config.php](php/config.php) to version control
-2. **Admin dashboard:** Use a strong `APP_ADMIN_KEY` or implement proper authentication
-3. **File permissions:** Make sure `php/registrations.json` is not publicly downloadable (deny access via `.htaccess` if needed)
-4. **Email validation:** The app performs basic validation, but always verify important data manually
+- **Do not commit** `php/config.php` or `registrations.json`.
+- Use a strong `APP_ADMIN_KEY` (or implement real authentication if you want to harden it).
+- `registrations.json` contains personal data. Recommended:
+  - Place the file outside the web root (best), **or**
+  - Block direct access to it (see below).
+
+### Block direct access to registrations.json (Apache)
+
+Create a `.htaccess` in the same folder as `registrations.json` (project root):
+
+```apache
+<Files "registrations.json">
+  Require all denied
+</Files>
+```
+
+> Note: This blocks only the JSON file, not the PHP dashboard.
 
 ## Troubleshooting
 
-### Emails not arriving?
+### Emails not arriving
 
-- Check your spam folder
-- Verify `APP_FROM_EMAIL` is a valid email from your domain
-- Test if your hosting supports `mail()` (ask your provider)
-- Consider using SMTP (PHPMailer) if `mail()` doesn't work
+- Check spam folder
+- Make sure `APP_FROM_EMAIL` is a real domain email
+- Ask your host if `mail()` is supported/enabled
+- Consider switching to SMTP (PHPMailer) if needed
 
-### Data not saving?
+### Data not saving
 
-- Check file permissions on `php/` folder and `registrations.json`
-- Look for errors in your server's error log
-- Enable error display temporarily: `ini_set('display_errors', '1');` in [submit_registration.php](submit_registration.php)
-
-### 500 Internal Server Error?
-
-- Check file permissions
-- Check PHP version (must be 8.0+)
-- Review server error logs for details
+- Check write permissions on `registrations.json`
+- Check server error logs
+- Temporarily enable errors for debugging (then turn off again)
 
 ## Customization
 
-- **Payment page:** Edit [html/payment.html](html/payment.html) to add your payment link (Tikkie, Mollie, etc.)
-- **Form fields:** Modify [index.html](index.html) to add/remove fields
-- **Styling:** Adjust colors and layout in [css/style.css](css/style.css)
-- **Email template:** Edit the message format in [submit_registration.php](submit_registration.php)
+- Payment page: edit `html/payment.html` and replace the payment link
+- Form fields: update `index.html` and keep POST keys aligned with `submit_registration.php`
+- Styling:
+  - `css/style.css` for public pages
+  - `css/admin.css` for the dashboard
+- Email template: edit the message in `submit_registration.php`
 
 ## License
 
-This is a simple starter kit for personal/educational use. Feel free to modify as needed.
+Starter kit for personal/educational use. Modify freely.
